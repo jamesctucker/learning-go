@@ -27,6 +27,7 @@ func genRandomNumber() int {
 }
 
 func guess(target int) {
+	success := false
 	for guesses := 0; guesses < 10; guesses++ {
 		if guesses > 0 {
 			remaining := 10 - guesses
@@ -51,8 +52,12 @@ func guess(target int) {
 		} else if guess > target {
 			fmt.Println("Oops! Your guess was HIGH.")
 		} else {
+			success = true
 			fmt.Println("Good job! You guessed it!")
 			break
 		}
+	}
+	if !success {
+		fmt.Println("Sorry, you didn't guess my number. It was", target)
 	}
 }
