@@ -27,22 +27,29 @@ func genRandomNumber() int {
 }
 
 func guess(target int) {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Make a guess: ")
-	input, err := reader.ReadString('\n')
-	if err != nil {
-		log.Fatal(err)
-	}
+	for guesses := 0; guesses < 10; guesses++ {
+		if guesses > 0 {
+			remaining := 10 - guesses
+			fmt.Println("You have", remaining, "left.")
+		}
 
-	input = strings.TrimSpace(input)
-	guess, err := strconv.Atoi(input)
-	if err != nil {
-		log.Fatal(err)
-	}
+		reader := bufio.NewReader(os.Stdin)
+		fmt.Print("Make a guess: ")
+		input, err := reader.ReadString('\n')
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	if guess < target {
-		fmt.Println("Oops! Your guess was LOW.")
-	} else if guess > target {
-		fmt.Println("Oops! Your guess was HIGH.")
+		input = strings.TrimSpace(input)
+		guess, err := strconv.Atoi(input)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if guess < target {
+			fmt.Println("Oops! Your guess was LOW.")
+		} else if guess > target {
+			fmt.Println("Oops! Your guess was HIGH.")
+		}
 	}
 }
